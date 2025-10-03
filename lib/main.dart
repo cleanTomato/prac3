@@ -65,6 +65,64 @@ class InfoCard extends StatelessWidget {
   }
 }
 
+// Собственный StatefulWidget - Переключатель темы
+class ThemeSwitcher extends StatefulWidget {
+  const ThemeSwitcher({super.key});
+
+  @override
+  State<ThemeSwitcher> createState() => _ThemeSwitcherState();
+}
+
+class _ThemeSwitcherState extends State<ThemeSwitcher> {
+  bool _isDarkMode = false;
+
+  void _toggleTheme() {
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: _isDarkMode ? Colors.grey[800] : Colors.grey[200],
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: _isDarkMode ? Colors.white : Colors.black,
+          width: 1,
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            _isDarkMode ? 'Тёмная тема' : 'Светлая тема',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: _isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: _toggleTheme,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _isDarkMode ? Colors.blue : Colors.orange,
+            ),
+            child: Text(
+              _isDarkMode ? 'Включить светлую' : 'Включить тёмную',
+              style: TextStyle(
+                color: _isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -95,6 +153,20 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            // Использование собственного StatefulWidget
+            const Text(
+              'Собственный StatefulWidget',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Этот виджет меняет своё состояние при нажатии кнопки:',
+              style: TextStyle(fontSize: 14),
+            ),
+            const SizedBox(height: 16),
+            const ThemeSwitcher(),
+            const SizedBox(height: 20),
+
             // Использование собственного StatelessWidget - InfoCard
             const Text(
               'Собственный StatelessWidget',
