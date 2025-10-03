@@ -19,6 +19,52 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Собственный StatelessWidget - Информационная карточка
+class InfoCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final Color color;
+
+  const InfoCard({
+    super.key,
+    required this.title,
+    required this.description,
+    this.color = Colors.blue,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color, width: 2),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            description,
+            style: const TextStyle(fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -49,6 +95,26 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            // Использование собственного StatelessWidget - InfoCard
+            const Text(
+              'Собственный StatelessWidget',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+
+            const InfoCard(
+              title: 'Добро пожаловать!',
+              description: 'Это пример использования собственного StatelessWidget. Карточка может переиспользоваться с разным содержимым.',
+              color: Colors.green,
+            ),
+
+            const InfoCard(
+              title: 'Статистика',
+              description: 'Количество нажатий кнопки отображается ниже. Этот виджет демонстрирует принцип переиспользования кода.',
+              color: Colors.orange,
+            ),
+
+            // 1. Text Widget
             const Text(
               '1. Виджет Text',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -61,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 20),
 
+            // 2. Button Widget
             const Text(
               '2. Виджет Button',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -77,6 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 20),
 
+            // 3. Column Widget
             const Text(
               '3. Виджет Column',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -106,6 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 20),
 
+            // 4. Row Widget
             const Text(
               '4. Виджет Row',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -136,6 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 20),
 
+            // 5. SizedBox Widget
             const Text(
               '5. Виджет SizedBox',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -164,6 +234,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 20),
 
+            // 6. Padding Widget
             const Text(
               '6. Виджет Padding',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -180,6 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 20),
 
+            // 7. Container Widget
             const Text(
               '7. Виджет Container',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
